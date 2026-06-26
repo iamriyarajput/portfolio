@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Riya Rajput 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rose: #E8837A;
+      --lilac: #C9A8E0;
+      --gold: #F5C842;
+      --cream: #FFF8F0;
+      --plum: #3D1A4A;
+      --blush: #F9D5D3;
+      --mint: #A8D8C8;
+      --deep-rose: #C45C55;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--plum);
+      overflow-x: hidden;
+    }
+
+    /* ========== CONFETTI CANVAS ========== */
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #3D1A4A 0%, #6B2D6B 30%, #C45C55 65%, #F5C842 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(249,213,211,0.15) 0%, transparent 70%);
+    }
+
+    .hero-badge {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.05;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3vw, 1.7rem);
+      font-style: italic;
+      color: var(--blush);
+      margin: 1rem 0 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.7s forwards;
+    }
+
+    .hero-age-ring {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 1.5rem auto;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.9s forwards, pulse-ring 3s ease-in-out 2s infinite;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-age-ring::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,200,66,0.3);
+    }
+
+    .age-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .age-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-top: 2px;
+    }
+
+    .hero-date {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.15em;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.1s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: fadeIn 1s ease 2s both;
+    }
+
+    .scroll-dot {
+      width: 4px;
+      height: 30px;
+      border-radius: 2px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+      animation: scroll-bounce 1.8s ease-in-out infinite;
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      color: var(--plum);
+    }
+
+    .section-heading span {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    /* ========== DIVIDER ========== */
+    .petal-divider {
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 2rem 0;
+      letter-spacing: 0.5rem;
+      color: var(--lilac);
+    }
+
+    /* ========== WHO IS RIYA ========== */
+    .who-section {
+      background: linear-gradient(135deg, #FFF8F0, #F9D5D3);
+      border-radius: 2rem;
+      padding: 4rem 3rem;
+      margin: 0 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .who-section::after {
+      content: '✦';
+      position: absolute;
+      font-size: 18rem;
+      color: rgba(201,168,224,0.12);
+      right: -3rem;
+      top: -3rem;
+      pointer-events: none;
+    }
+
+    .trait-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .trait-card {
+      background: #fff;
+      border-radius: 1.2rem;
+      padding: 1.8rem 1.5rem;
+      border-left: 4px solid var(--rose);
+      box-shadow: 0 4px 20px rgba(61,26,74,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .trait-card:nth-child(2) { border-color: var(--lilac); }
+    .trait-card:nth-child(3) { border-color: var(--gold); }
+    .trait-card:nth-child(4) { border-color: var(--mint); }
+
+    .trait-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(61,26,74,0.12);
+    }
+
+    .trait-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+
+    .trait-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--plum);
+      margin-bottom: 0.4rem;
+    }
+
+    .trait-desc {
+      font-size: 0.85rem;
+      color: #7a6080;
+      line-height: 1.6;
+    }
+
+    /* ========== MEMORIES TIMELINE ========== */
+    .memories-section { position: relative; }
+
+    .timeline {
+      position: relative;
+      margin-top: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--lilac), var(--rose), var(--gold));
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+    .timeline-content {
+      flex: 1;
+      background: #fff;
+      border-radius: 1.2rem;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 4px 20px rgba(61,26,74,0.07);
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content { margin-right: calc(50% + 1rem); }
+    .timeline-item:nth-child(even) .timeline-content { margin-left: calc(50% + 1rem); }
+
+    .timeline-year {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 50%;
+      margin-top: -18px;
+      width: 56px;
+      height: 36px;
+      background: var(--plum);
+      color: var(--gold);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      z-index: 2;
+      box-shadow: 0 0 0 4px var(--cream);
+    }
+
+    .timeline-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--plum);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-text {
+      font-size: 0.85rem;
+      color: #7a6080;
+      line-height: 1.65;
+    }
+
+    .timeline-emoji {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ========== WISH LETTER ========== */
+    .wish-section {
+      background: linear-gradient(145deg, var(--plum), #6B2D6B);
+      border-radius: 2rem;
+      padding: 5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .wish-section::before {
+      content: '🌸';
+      position: absolute;
+      font-size: 15rem;
+      opacity: 0.05;
+      top: -3rem;
+      left: -3rem;
+    }
+
+    .wish-quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem;
+      line-height: 0.5;
+      color: var(--gold);
+      opacity: 0.4;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .wish-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+      font-style: italic;
+      color: #fff;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .wish-text strong {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .wish-from {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--blush);
+    }
+
+    /* ========== LINKS ========== */
+    .links-section {
+      text-align: center;
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .link-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .link-pill:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(61,26,74,0.2);
+    }
+
+    .pill-linkedin { background: var(--plum); color: #fff; }
+    .pill-instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff; }
+    .pill-company { background: var(--rose); color: #fff; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--plum);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    footer strong { color: var(--gold); font-weight: 600; }
+    footer a { color: var(--blush); text-decoration: none; }
+
+    .footer-heart { color: var(--rose); }
+
+    /* ========== FLOATING PETALS ========== */
+    .petal {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: petal-fall linear infinite;
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245,200,66,0.3); }
+      50%       { box-shadow: 0 0 0 20px rgba(245,200,66,0); }
+    }
+
+    @keyframes scroll-bounce {
+      0%, 100% { transform: scaleY(1); opacity: 0.5; }
+      50%       { transform: scaleY(0.6); opacity: 1; }
+    }
+
+    @keyframes petal-fall {
+      0%   { opacity: 0; transform: translateY(-20px) rotate(0deg); }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 640px) {
+      .who-section { padding: 2.5rem 1.5rem; }
+      .wish-section { padding: 3rem 1.5rem; }
+      .timeline::before { left: 20px; }
+      .timeline-item,
+      .timeline-item:nth-child(even) { flex-direction: column; }
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        margin: 0 0 0 3rem;
+      }
+      .timeline-year {
+        left: 20px;
+        transform: none;
+        top: 0;
+        margin-top: 0;
+        position: relative;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    /* ========== SCROLL REVEAL ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ===== HERO ===== -->
+<section class="hero" style="max-width:100%; padding: 4rem 2rem;">
+  <p class="hero-badge">✨ 27th June 2026 · A Day to Celebrate ✨</p>
+  <h1 class="hero-name">Happy Birthday,<br/>Riya ♡</h1>
+  <p class="hero-tagline">"The darling creative soul — turning the world colourful, one story at a time."</p>
+  <div class="hero-age-ring">
+    <span class="age-number">24</span>
+    <span class="age-label">years of magic</span>
+  </div>
+  <p class="hero-date">Born · 27 June 2002 · Jaipur 🌸</p>
+  <div class="scroll-hint">
+    <div class="scroll-dot"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ===== WHO IS RIYA ===== -->
+<div style="padding: 5rem 1rem 0;">
+  <div class="who-section reveal">
+    <p class="section-eyebrow">✦ About her</p>
+    <h2 class="section-heading">She's not just <span>beautiful</span> —<br/>she's a whole personality.</h2>
+    <p style="color:#7a6080; line-height:1.8; font-size:0.95rem; max-width:600px;">
+      Brand Strategist. Influencer Marketing Manager. Content Lead at Devout Growth.
+      Someone who turns LinkedIn into a playground, campaigns into magic, and every room she walks into — memorable.
+    </p>
+    <div class="trait-grid">
+      <div class="trait-card">
+        <div class="trait-icon">🎤</div>
+        <div class="trait-title">Public Speaker</div>
+        <div class="trait-desc">Mind-blowing clarity, confidence, and charisma — she holds a room like a pro.</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">✍️</div>
+        <div class="trait-title">Creative Writer</div>
+        <div class="trait-desc">Her words cut through noise — raw, real, and always felt deeply by everyone who reads them.</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">🌸</div>
+        <div class="trait-title">Sensitive & Strong</div>
+        <div class="trait-desc">She'll cry mid-argument and counter you back even stronger. That's pure Riya energy.</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">⚡</div>
+        <div class="trait-title">Brand Builder</div>
+        <div class="trait-desc">From campaigns to influencer networks — she makes things work, effortlessly, brilliantly.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MEMORIES TIMELINE ===== -->
+<section class="memories-section reveal">
+  <p class="section-eyebrow">✦ Memories</p>
+  <h2 class="section-heading">A journey that started in<br/><span>Standard 7</span></h2>
+  <p style="color:#7a6080; line-height:1.8; font-size:0.95rem;">
+    We've known each other since 2012 — same school, same laughter, same years growing up.
+    Some friendships don't need daily calls; they're written into who you are.
+  </p>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-year">2012</div>
+      <div class="timeline-content">
+        <div class="timeline-emoji">🏫</div>
+        <div class="timeline-title">Standard 7 — Where it all began</div>
+        <div class="timeline-text">New class, new faces — and somewhere in that chaos, a girl who already stood out. Riya walked into the room and the room noticed.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2013</div>
+      <div class="timeline-content">
+        <div class="timeline-emoji">📚</div>
+        <div class="timeline-title">Class chaos & real laughs</div>
+        <div class="timeline-text">School days with Riya were never boring. Whether it was class, corridors, or those shared lunch breaks — the energy was always alive.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2016</div>
+      <div class="timeline-content">
+        <div class="timeline-emoji">🎓</div>
+        <div class="timeline-title">10th Board — Last chapter together</div>
+        <div class="timeline-text">Four years of shared school life wrapped up. Different paths ahead, but the friendship? That stays. Always.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">Now</div>
+      <div class="timeline-content">
+        <div class="timeline-emoji">🚀</div>
+        <div class="timeline-title">Riya Rajput — Content Lead, Brand Strategist</div>
+        <div class="timeline-text">From school corridors to building brands at Devout Growth. Watching you grow has been genuinely inspiring, Riya.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== WISH LETTER ===== -->
+<div style="padding: 0 1rem 5rem;">
+  <div class="wish-section reveal">
+    <span class="wish-quote-mark">"</span>
+    <p class="wish-text">
+      Riya — you were always <strong>too vibrant to be ordinary</strong>.<br/><br/>
+      From the girl who lit up every classroom to the woman who builds brands and moves people with her words — you've never once dimmed your light for anyone.<br/><br/>
+      I hope this year brings you everything your generous heart deserves: <strong>success that excites you, love that holds you, and stories worth telling</strong>.<br/><br/>
+      Keep that chulbuli vibe alive. The world genuinely needs more of you in it. 🌸
+    </p>
+    <div class="petal-divider">🌸 · ✨ · 🌸</div>
+    <p class="wish-from">With warmth & all the old memories,<br/>Ankit Saurav 🎂</p>
+  </div>
+</div>
+
+<!-- ===== LINKS ===== -->
+<div class="links-section reveal">
+  <p class="section-eyebrow">✦ Connect with Riya</p>
+  <h2 class="section-heading" style="font-size:2rem;">Follow her <span>journey</span></h2>
+  <div class="link-row">
+    <a href="https://www.linkedin.com/in/riya-rajput-6b6721205" target="_blank" class="link-pill pill-linkedin">
+      💼 LinkedIn — Riya Rajput
+    </a>
+    <a href="https://www.instagram.com/_riyaaarushes09" target="_blank" class="link-pill pill-instagram">
+      📸 Instagram — @_riyaaarushes09
+    </a>
+    <a href="https://www.devoutgrowth.com/" target="_blank" class="link-pill pill-company">
+      🏢 Devout Growth
+    </a>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>🎂 Crafted with love for <strong>Riya Rajput's 24th Birthday — 27 June 2026</strong></p>
+  <p style="margin-top:0.5rem;">Created &amp; wished by <strong>Ankit Saurav</strong> · School friend since 2012 <span class="footer-heart">♥</span></p>
+  <p style="margin-top:0.3rem;">© 2026 <a href="https://www.linkedin.com/in/riya-rajput-6b6721205" target="_blank">Riya Rajput</a> — All rights reserved.</p>
+</footer>
+
+<script>
+  // ===== CONFETTI =====
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const COLORS = ['#E8837A','#C9A8E0','#F5C842','#F9D5D3','#A8D8C8','#fff','#FFC0CB'];
+  const SHAPES = ['●','♥','★','✦','⬟'];
+
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init = false) {
+      this.x = Math.random() * canvas.width;
+      this.y = init ? Math.random() * canvas.height : -20;
+      this.size = Math.random() * 8 + 4;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      this.shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+      this.speedY = Math.random() * 1.5 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 1.2;
+      this.rotation = Math.random() * 360;
+      this.rotSpeed = (Math.random() - 0.5) * 3;
+      this.opacity = Math.random() * 0.6 + 0.3;
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotSpeed;
+      if (this.y > canvas.height + 20) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.opacity;
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation * Math.PI / 180);
+      ctx.font = `${this.size * 2}px serif`;
+      ctx.fillStyle = this.color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(this.shape, 0, 0);
+      ctx.restore();
+    }
+  }
+
+  const particles = Array.from({ length: 60 }, () => new Particle());
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // ===== SCROLL REVEAL =====
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ===== BIRTHDAY BURST on load =====
+  setTimeout(() => {
+    for (let i = 0; i < 30; i++) {
+      const p = new Particle();
+      p.y = canvas.height / 2;
+      p.x = canvas.width / 2 + (Math.random() - 0.5) * 200;
+      p.speedY = -(Math.random() * 4 + 2);
+      p.speedX = (Math.random() - 0.5) * 6;
+      particles.push(p);
+    }
+  }, 1200);
+</script>
+</body>
+</html>
