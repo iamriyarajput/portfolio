@@ -1,746 +1,1048 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Riya Rajput 🌸</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Riya Rajput — Brand Strategist & Content Lead</title>
+  <meta name="description" content="Riya Rajput — Brand Communication Strategist, Influencer Marketing Manager & Content Lead at Devout Growth."/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
   <style>
+    /* ── TOKENS ── */
     :root {
-      --rose: #E8837A;
-      --lilac: #C9A8E0;
-      --gold: #F5C842;
-      --cream: #FFF8F0;
-      --plum: #3D1A4A;
-      --blush: #F9D5D3;
-      --mint: #A8D8C8;
-      --deep-rose: #C45C55;
+      --ink:    #0D0D0D;
+      --ivory:  #F7F3EE;
+      --rose:   #D4847A;
+      --gold:   #C9A84C;
+      --lilac:  #9B7FBD;
+      --mid:    #1A1A1A;
+      --muted:  #6B6560;
+      --border: rgba(247,243,238,0.1);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
+    /* ── RESET ── */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; font-size:16px; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--cream);
-      color: var(--plum);
-      overflow-x: hidden;
+      font-family:'Inter', sans-serif;
+      background:var(--ink);
+      color:var(--ivory);
+      overflow-x:hidden;
+      cursor:none;
     }
 
-    /* ========== CONFETTI CANVAS ========== */
-    #confetti-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 9999;
+    /* ── CUSTOM CURSOR ── */
+    #cursor {
+      position:fixed;
+      width:12px; height:12px;
+      background:var(--rose);
+      border-radius:50%;
+      pointer-events:none !important;
+      z-index:10000;
+      transform:translate(-50%,-50%);
+      transition:width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+      will-change:left,top;
     }
+    #cursor-ring {
+      position:fixed;
+      width:40px; height:40px;
+      border:1px solid rgba(212,132,122,0.5);
+      border-radius:50%;
+      pointer-events:none !important;
+      z-index:9999;
+      transform:translate(-50%,-50%);
+      transition:width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+      will-change:left,top;
+    }
+    body:hover #cursor { opacity:1; }
+    a:hover ~ #cursor, button:hover ~ #cursor { width:24px; height:24px; }
 
-    /* ========== HERO ========== */
+    /* ── NAV ── */
+    nav {
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1.5rem 4rem;
+      background:rgba(13,13,13,0);
+      backdrop-filter:blur(0px);
+      transition:background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background:rgba(13,13,13,0.92);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo {
+      font-family:'Dancing Script', cursive;
+      font-size:1.5rem;
+      color:var(--ivory);
+      text-decoration:none;
+      letter-spacing:0.02em;
+    }
+    .nav-links {
+      display:flex;
+      gap:2.5rem;
+      list-style:none;
+    }
+    .nav-links a {
+      font-size:0.75rem;
+      font-weight:500;
+      letter-spacing:0.15em;
+      text-transform:uppercase;
+      color:rgba(247,243,238,0.6);
+      text-decoration:none;
+      transition:color 0.2s;
+    }
+    .nav-links a:hover { color:var(--rose); }
+
+    /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #3D1A4A 0%, #6B2D6B 30%, #C45C55 65%, #F5C842 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:0 4rem 6rem;
+      position:relative;
+      overflow:hidden;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, rgba(249,213,211,0.15) 0%, transparent 70%);
+    .hero-bg {
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(ellipse 60% 50% at 75% 40%, rgba(155,127,189,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(212,132,122,0.1) 0%, transparent 60%),
+        var(--ink);
     }
 
-    .hero-badge {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.3s forwards;
+    .hero-line {
+      position:absolute;
+      top:50%;
+      right:3rem;
+      transform:translateY(-50%);
+      width:1px;
+      height:40vh;
+      background:linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity:0.4;
     }
 
-    .hero-name {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(3.5rem, 10vw, 8rem);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.05;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.5s forwards;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    .hero-eyebrow {
+      font-size:0.68rem;
+      font-weight:500;
+      letter-spacing:0.3em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:2rem;
+      opacity:0;
+      animation:fadeUp 0.8s ease 0.4s forwards;
     }
 
-    .hero-tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.1rem, 3vw, 1.7rem);
-      font-style: italic;
-      color: var(--blush);
-      margin: 1rem 0 2rem;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.7s forwards;
+    .hero-name-block {
+      position:relative;
+      opacity:0;
+      animation:fadeUp 1s ease 0.5s forwards;
     }
 
-    .hero-age-ring {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 3px solid var(--gold);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 1.5rem auto;
-      position: relative;
-      opacity: 0;
-      animation: fadeUp 1s ease 0.9s forwards, pulse-ring 3s ease-in-out 2s infinite;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
+    .hero-name-first {
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(6rem, 16vw, 14rem);
+      font-weight:300;
+      line-height:0.85;
+      letter-spacing:-0.02em;
+      color:var(--ivory);
+      display:block;
     }
 
-    .hero-age-ring::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 1px solid rgba(245,200,66,0.3);
+    .hero-name-last {
+      font-family:'Dancing Script', cursive;
+      font-size:clamp(2rem, 5vw, 4.5rem);
+      color:var(--rose);
+      display:block;
+      margin-left:0.5rem;
+      margin-top:0.3rem;
     }
 
-    .age-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 1;
+    .hero-roles {
+      margin-top:2.5rem;
+      display:flex;
+      align-items:center;
+      gap:1.5rem;
+      opacity:0;
+      animation:fadeUp 1s ease 0.8s forwards;
     }
 
-    .age-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-top: 2px;
+    .hero-typewriter {
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(1.1rem, 2vw, 1.5rem);
+      font-style:italic;
+      color:rgba(247,243,238,0.7);
+      min-width:320px;
     }
 
-    .hero-date {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.15em;
-      opacity: 0;
-      animation: fadeUp 1s ease 1.1s forwards;
+    .cursor-blink {
+      display:inline-block;
+      width:2px; height:1.1em;
+      background:var(--rose);
+      vertical-align:middle;
+      margin-left:2px;
+      animation:blink 1s step-end infinite;
     }
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      animation: fadeIn 1s ease 2s both;
+    .hero-cta {
+      display:inline-flex;
+      align-items:center;
+      gap:0.6rem;
+      padding:0.8rem 2rem;
+      border:1px solid rgba(247,243,238,0.25);
+      border-radius:50px;
+      font-size:0.75rem;
+      font-weight:500;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--ivory);
+      text-decoration:none;
+      transition:border-color 0.3s, background 0.3s;
+    }
+    .hero-cta:hover {
+      border-color:var(--rose);
+      background:rgba(212,132,122,0.1);
     }
 
-    .scroll-dot {
-      width: 4px;
-      height: 30px;
-      border-radius: 2px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
-      animation: scroll-bounce 1.8s ease-in-out infinite;
+    .hero-scroll-cue {
+      position:absolute;
+      bottom:2.5rem;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      opacity:0;
+      animation:fadeIn 1s ease 2s forwards;
+    }
+    .scroll-track {
+      width:1px; height:50px;
+      background:linear-gradient(to bottom, var(--rose), transparent);
+      animation:grow-line 2s ease-in-out infinite;
+    }
+    .scroll-label {
+      font-size:0.6rem;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
-    /* ========== SECTIONS ========== */
-    section {
-      padding: 6rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
+    /* ── SECTIONS ── */
+    .section-wrapper {
+      padding:7rem 4rem;
+      max-width:1100px;
+      margin:0 auto;
     }
 
-    .section-eyebrow {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--rose);
-      margin-bottom: 0.8rem;
+    .eyebrow {
+      font-size:0.65rem;
+      font-weight:600;
+      letter-spacing:0.3em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:1rem;
     }
 
-    .section-heading {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-      color: var(--plum);
+    .display-heading {
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(2.5rem, 5vw, 4rem);
+      font-weight:300;
+      line-height:1.1;
+      letter-spacing:-0.01em;
     }
 
-    .section-heading span {
-      color: var(--rose);
-      font-style: italic;
+    .display-heading em {
+      font-style:italic;
+      color:var(--rose);
     }
 
-    /* ========== DIVIDER ========== */
-    .petal-divider {
-      text-align: center;
-      font-size: 1.5rem;
-      margin: 2rem 0;
-      letter-spacing: 0.5rem;
-      color: var(--lilac);
+    /* ── ABOUT ── */
+    .about-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:5rem;
+      margin-top:4rem;
+      align-items:start;
     }
 
-    /* ========== WHO IS RIYA ========== */
-    .who-section {
-      background: linear-gradient(135deg, #FFF8F0, #F9D5D3);
-      border-radius: 2rem;
-      padding: 4rem 3rem;
-      margin: 0 1rem;
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
+    .about-text p {
+      font-size:0.95rem;
+      line-height:1.9;
+      color:rgba(247,243,238,0.72);
+      margin-bottom:1.2rem;
     }
 
-    .who-section::after {
-      content: '✦';
-      position: absolute;
-      font-size: 18rem;
-      color: rgba(201,168,224,0.12);
-      right: -3rem;
-      top: -3rem;
-      pointer-events: none;
+    .about-text p strong {
+      color:var(--ivory);
+      font-weight:500;
     }
 
-    .trait-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2.5rem;
+    .about-stats {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:2rem;
     }
 
-    .trait-card {
-      background: #fff;
-      border-radius: 1.2rem;
-      padding: 1.8rem 1.5rem;
-      border-left: 4px solid var(--rose);
-      box-shadow: 0 4px 20px rgba(61,26,74,0.06);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .stat-item {
+      border-top:1px solid var(--border);
+      padding-top:1.5rem;
     }
 
-    .trait-card:nth-child(2) { border-color: var(--lilac); }
-    .trait-card:nth-child(3) { border-color: var(--gold); }
-    .trait-card:nth-child(4) { border-color: var(--mint); }
-
-    .trait-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 35px rgba(61,26,74,0.12);
+    .stat-number {
+      font-family:'Cormorant Garamond', serif;
+      font-size:3rem;
+      font-weight:300;
+      color:var(--rose);
+      line-height:1;
+      margin-bottom:0.3rem;
     }
 
-    .trait-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-
-    .trait-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--plum);
-      margin-bottom: 0.4rem;
+    .stat-label {
+      font-size:0.72rem;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
-    .trait-desc {
-      font-size: 0.85rem;
-      color: #7a6080;
-      line-height: 1.6;
+    /* ── EXPERTISE ── */
+    .expertise-section {
+      background:var(--ivory);
+      color:var(--ink);
     }
 
-    /* ========== MEMORIES TIMELINE ========== */
-    .memories-section { position: relative; }
+    .expertise-section .eyebrow { color:var(--rose); }
+    .expertise-section .display-heading { color:var(--ink); }
+    .expertise-section .display-heading em { color:var(--rose); }
 
-    .timeline {
-      position: relative;
-      margin-top: 3rem;
+    .expertise-grid {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:0;
+      margin-top:4rem;
+      border:1px solid rgba(13,13,13,0.12);
     }
 
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--lilac), var(--rose), var(--gold));
+    .expertise-card {
+      padding:2.5rem;
+      border-right:1px solid rgba(13,13,13,0.12);
+      border-bottom:1px solid rgba(13,13,13,0.12);
+      transition:background 0.3s;
+      position:relative;
+      overflow:hidden;
     }
 
-    .timeline-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      position: relative;
+    .expertise-card::before {
+      content:'';
+      position:absolute;
+      bottom:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(to right, var(--rose), var(--lilac));
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform 0.4s ease;
     }
 
-    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+    .expertise-card:hover::before { transform:scaleX(1); }
+    .expertise-card:hover { background:rgba(212,132,122,0.04); }
+    .expertise-card:nth-child(3n) { border-right:none; }
 
-    .timeline-content {
-      flex: 1;
-      background: #fff;
-      border-radius: 1.2rem;
-      padding: 1.8rem 2rem;
-      box-shadow: 0 4px 20px rgba(61,26,74,0.07);
-      position: relative;
+    .card-icon {
+      font-size:1.8rem;
+      margin-bottom:1.2rem;
+      display:block;
     }
 
-    .timeline-item:nth-child(odd) .timeline-content { margin-right: calc(50% + 1rem); }
-    .timeline-item:nth-child(even) .timeline-content { margin-left: calc(50% + 1rem); }
-
-    .timeline-year {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 50%;
-      margin-top: -18px;
-      width: 56px;
-      height: 36px;
-      background: var(--plum);
-      color: var(--gold);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      z-index: 2;
-      box-shadow: 0 0 0 4px var(--cream);
+    .card-title {
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.3rem;
+      font-weight:600;
+      color:var(--ink);
+      margin-bottom:0.6rem;
     }
 
-    .timeline-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--plum);
-      margin-bottom: 0.4rem;
+    .card-desc {
+      font-size:0.82rem;
+      line-height:1.75;
+      color:#5A5450;
     }
 
-    .timeline-text {
-      font-size: 0.85rem;
-      color: #7a6080;
-      line-height: 1.65;
+    /* ── WORK / PROJECTS ── */
+    .work-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.5rem;
+      margin-top:4rem;
     }
 
-    .timeline-emoji {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
+    .work-card {
+      border:1px solid var(--border);
+      border-radius:4px;
+      padding:2.5rem;
+      position:relative;
+      overflow:hidden;
+      transition:border-color 0.3s, transform 0.3s;
+      background:var(--mid);
     }
 
-    /* ========== WISH LETTER ========== */
-    .wish-section {
-      background: linear-gradient(145deg, var(--plum), #6B2D6B);
-      border-radius: 2rem;
-      padding: 5rem 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      max-width: 900px;
-      margin: 0 auto;
+    .work-card:hover {
+      border-color:var(--rose);
+      transform:translateY(-4px);
     }
 
-    .wish-section::before {
-      content: '🌸';
-      position: absolute;
-      font-size: 15rem;
-      opacity: 0.05;
-      top: -3rem;
-      left: -3rem;
+    .work-card-large {
+      grid-column:span 2;
     }
 
-    .wish-quote-mark {
-      font-family: 'Playfair Display', serif;
-      font-size: 8rem;
-      line-height: 0.5;
-      color: var(--gold);
-      opacity: 0.4;
-      display: block;
-      margin-bottom: 1rem;
+    .work-tag {
+      display:inline-block;
+      font-size:0.62rem;
+      font-weight:600;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--gold);
+      background:rgba(201,168,76,0.1);
+      padding:0.25rem 0.75rem;
+      border-radius:50px;
+      margin-bottom:1.2rem;
     }
 
-    .wish-text {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.2rem, 2.5vw, 1.55rem);
-      font-style: italic;
-      color: #fff;
-      line-height: 1.8;
-      max-width: 700px;
-      margin: 0 auto 2rem;
+    .work-title {
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.6rem;
+      font-weight:600;
+      color:var(--ivory);
+      margin-bottom:0.8rem;
+      line-height:1.2;
     }
 
-    .wish-text strong {
-      color: var(--gold);
-      font-style: normal;
+    .work-desc {
+      font-size:0.82rem;
+      line-height:1.75;
+      color:rgba(247,243,238,0.55);
     }
 
-    .wish-from {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.6rem;
-      color: var(--blush);
+    .work-metrics {
+      display:flex;
+      gap:2rem;
+      margin-top:1.5rem;
+      padding-top:1.5rem;
+      border-top:1px solid var(--border);
     }
 
-    /* ========== LINKS ========== */
-    .links-section {
-      text-align: center;
-      padding: 4rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
+    .metric {
+      display:flex;
+      flex-direction:column;
+      gap:2px;
     }
 
-    .link-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
+    .metric-val {
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.5rem;
+      font-weight:600;
+      color:var(--rose);
     }
 
-    .link-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.8rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      letter-spacing: 0.03em;
+    .metric-key {
+      font-size:0.65rem;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
-    .link-pill:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(61,26,74,0.2);
+    /* ── PHILOSOPHY BREAK ── */
+    .philosophy-section {
+      background:linear-gradient(135deg, #1A0A2E, #2D1A4A, #4A1A2A);
+      text-align:center;
+      padding:8rem 4rem;
+      position:relative;
+      overflow:hidden;
     }
 
-    .pill-linkedin { background: var(--plum); color: #fff; }
-    .pill-instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff; }
-    .pill-company { background: var(--rose); color: #fff; }
+    .philosophy-section::before {
+      content:'"';
+      position:absolute;
+      font-family:'Cormorant Garamond', serif;
+      font-size:30rem;
+      line-height:0.7;
+      top:0; left:2rem;
+      color:rgba(155,127,189,0.06);
+      pointer-events:none;
+    }
 
-    /* ========== FOOTER ========== */
+    .philosophy-quote {
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(1.6rem, 3.5vw, 2.8rem);
+      font-style:italic;
+      font-weight:300;
+      color:var(--ivory);
+      max-width:800px;
+      margin:0 auto 2rem;
+      line-height:1.5;
+    }
+
+    .philosophy-quote strong {
+      color:var(--rose);
+      font-style:normal;
+    }
+
+    .philosophy-attr {
+      font-size:0.75rem;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list {
+      margin-top:4rem;
+      display:flex;
+      flex-direction:column;
+      gap:0;
+    }
+
+    .exp-item {
+      display:grid;
+      grid-template-columns:180px 1fr;
+      gap:3rem;
+      padding:2.5rem 0;
+      border-bottom:1px solid var(--border);
+      align-items:start;
+      transition:background 0.2s;
+    }
+
+    .exp-item:first-child { border-top:1px solid var(--border); }
+
+    .exp-period {
+      font-size:0.72rem;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      padding-top:0.3rem;
+    }
+
+    .exp-role {
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.3rem;
+      font-weight:600;
+      color:var(--ivory);
+      margin-bottom:0.3rem;
+    }
+
+    .exp-company {
+      font-size:0.8rem;
+      color:var(--rose);
+      font-weight:500;
+      margin-bottom:0.8rem;
+      letter-spacing:0.05em;
+    }
+
+    .exp-desc {
+      font-size:0.82rem;
+      line-height:1.75;
+      color:rgba(247,243,238,0.55);
+    }
+
+    /* ── SKILLS ── */
+    .skills-section {
+      background:var(--ivory);
+      color:var(--ink);
+    }
+    .skills-section .eyebrow { color:var(--lilac); }
+    .skills-section .display-heading { color:var(--ink); }
+    .skills-section .display-heading em { color:var(--lilac); }
+
+    .skills-cloud {
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.8rem;
+      margin-top:3rem;
+    }
+
+    .skill-tag {
+      padding:0.6rem 1.4rem;
+      border:1px solid rgba(13,13,13,0.15);
+      border-radius:50px;
+      font-size:0.78rem;
+      font-weight:500;
+      color:var(--ink);
+      transition:background 0.25s, border-color 0.25s, color 0.25s;
+      cursor:default;
+    }
+
+    .skill-tag:hover {
+      background:var(--lilac);
+      border-color:var(--lilac);
+      color:#fff;
+    }
+
+    .skill-tag.rose:hover { background:var(--rose); border-color:var(--rose); }
+    .skill-tag.gold:hover { background:var(--gold); border-color:var(--gold); color:var(--ink); }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      text-align:center;
+      padding:8rem 4rem;
+      position:relative;
+    }
+
+    .contact-section::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(ellipse 50% 60% at 50% 50%, rgba(155,127,189,0.08), transparent);
+      pointer-events:none;
+    }
+
+    .contact-email {
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(2rem, 5vw, 3.5rem);
+      font-weight:300;
+      font-style:italic;
+      color:var(--rose);
+      text-decoration:none;
+      display:inline-block;
+      margin:2rem 0;
+      position:relative;
+      z-index:2;
+      transition:color 0.3s;
+      border-bottom:1px solid transparent;
+    }
+
+    .contact-email:hover {
+      color:var(--gold);
+      border-bottom-color:var(--gold);
+    }
+
+    .contact-links {
+      display:flex;
+      justify-content:center;
+      gap:1.5rem;
+      margin-top:2.5rem;
+      flex-wrap:wrap;
+    }
+
+    .contact-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      padding:0.75rem 1.8rem;
+      border-radius:50px;
+      font-size:0.75rem;
+      font-weight:500;
+      letter-spacing:0.08em;
+      text-decoration:none;
+      position:relative;
+      z-index:2;
+      transition:transform 0.25s, box-shadow 0.25s;
+    }
+
+    .contact-pill:hover {
+      transform:translateY(-3px);
+      box-shadow:0 12px 35px rgba(0,0,0,0.4);
+    }
+
+    .pill-li { background:#0A66C2; color:#fff; }
+    .pill-ig { background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color:#fff; }
+    .pill-dg { background:var(--rose); color:#fff; }
+
+    /* ── FOOTER ── */
     footer {
-      background: var(--plum);
-      text-align: center;
-      padding: 2.5rem 2rem;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
+      border-top:1px solid var(--border);
+      padding:2rem 4rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:0.72rem;
+      color:var(--muted);
+      flex-wrap:wrap;
+      gap:1rem;
     }
 
-    footer strong { color: var(--gold); font-weight: 600; }
-    footer a { color: var(--blush); text-decoration: none; }
+    footer a { color:var(--rose); text-decoration:none; }
 
-    .footer-heart { color: var(--rose); }
-
-    /* ========== FLOATING PETALS ========== */
-    .petal {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      font-size: 1.2rem;
-      opacity: 0;
-      animation: petal-fall linear infinite;
-    }
-
-    /* ========== ANIMATIONS ========== */
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(30px); }
+      to   { opacity:1; transform:translateY(0); }
     }
-
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      from { opacity:0; }
+      to   { opacity:1; }
+    }
+    @keyframes blink {
+      50% { opacity:0; }
+    }
+    @keyframes grow-line {
+      0%,100% { transform:scaleY(0); transform-origin:top; }
+      50% { transform:scaleY(1); transform-origin:top; }
     }
 
-    @keyframes pulse-ring {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(245,200,66,0.3); }
-      50%       { box-shadow: 0 0 0 20px rgba(245,200,66,0); }
-    }
-
-    @keyframes scroll-bounce {
-      0%, 100% { transform: scaleY(1); opacity: 0.5; }
-      50%       { transform: scaleY(0.6); opacity: 1; }
-    }
-
-    @keyframes petal-fall {
-      0%   { opacity: 0; transform: translateY(-20px) rotate(0deg); }
-      10%  { opacity: 0.8; }
-      90%  { opacity: 0.8; }
-      100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
-    }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 640px) {
-      .who-section { padding: 2.5rem 1.5rem; }
-      .wish-section { padding: 3rem 1.5rem; }
-      .timeline::before { left: 20px; }
-      .timeline-item,
-      .timeline-item:nth-child(even) { flex-direction: column; }
-      .timeline-item:nth-child(odd) .timeline-content,
-      .timeline-item:nth-child(even) .timeline-content {
-        margin: 0 0 0 3rem;
-      }
-      .timeline-year {
-        left: 20px;
-        transform: none;
-        top: 0;
-        margin-top: 0;
-        position: relative;
-        margin-bottom: 0.5rem;
-      }
-    }
-
-    /* ========== SCROLL REVEAL ========== */
+    /* ── REVEAL ── */
     .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      opacity:0;
+      transform:translateY(35px);
+      transition:opacity 0.9s ease, transform 0.9s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
+    .reveal.in { opacity:1; transform:none; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px) {
+      nav { padding:1.2rem 1.5rem; }
+      .nav-links { display:none; }
+      .hero { padding:0 1.5rem 5rem; }
+      .section-wrapper { padding:5rem 1.5rem; }
+      .about-grid { grid-template-columns:1fr; gap:3rem; }
+      .expertise-grid { grid-template-columns:1fr; }
+      .expertise-card:nth-child(3n) { border-right:1px solid rgba(13,13,13,0.12); }
+      .work-grid { grid-template-columns:1fr; }
+      .work-card-large { grid-column:span 1; }
+      .exp-item { grid-template-columns:1fr; gap:0.5rem; }
+      .philosophy-section { padding:5rem 1.5rem; }
+      .contact-section { padding:5rem 1.5rem; }
+      footer { padding:1.5rem; flex-direction:column; text-align:center; }
     }
   </style>
 </head>
 <body>
 
-<canvas id="confetti-canvas"></canvas>
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
-<!-- ===== HERO ===== -->
-<section class="hero" style="max-width:100%; padding: 4rem 2rem;">
-  <p class="hero-badge">✨ 27th June 2026 · A Day to Celebrate ✨</p>
-  <h1 class="hero-name">Happy Birthday,<br/>Riya ♡</h1>
-  <p class="hero-tagline">"The darling creative soul — turning the world colourful, one story at a time."</p>
-  <div class="hero-age-ring">
-    <span class="age-number">24</span>
-    <span class="age-label">years of magic</span>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Riya Rajput</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+
+  <p class="hero-eyebrow">Brand Strategist · Content Lead · Influencer Marketing</p>
+
+  <div class="hero-name-block">
+    <span class="hero-name-first">RIYA</span>
+    <span class="hero-name-last">Rajput</span>
   </div>
-  <p class="hero-date">Born · 27 June 2002 · Jaipur 🌸</p>
-  <div class="scroll-hint">
-    <div class="scroll-dot"></div>
-    <span>scroll</span>
+
+  <div class="hero-roles">
+    <span class="hero-typewriter" id="typewriter"></span><span class="cursor-blink"></span>
+    &nbsp;&nbsp;
+    <a href="#contact" class="hero-cta">Let's connect ↗</a>
+  </div>
+
+  <div class="hero-scroll-cue">
+    <div class="scroll-track"></div>
+    <span class="scroll-label">scroll</span>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrapper">
+    <p class="eyebrow reveal">✦ About</p>
+    <h2 class="display-heading reveal">I build brands that<br/><em>talk human.</em></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm <strong>Riya Rajput</strong> — a Brand Communication Strategist and Content Lead who believes that the most powerful thing a brand can do is sound like a real person.
+        </p>
+        <p>
+          Currently driving brand identity and influencer ecosystems at <strong>Devout Growth</strong>, I work at the intersection of strategy, storytelling, and social — building campaigns that don't just get seen, but get felt.
+        </p>
+        <p>
+          I'm not just a strategist. I'm a writer who thinks in systems, a communicator who leads with empathy, and a creative who never forgets the business goal behind every piece of content.
+        </p>
+        <p>
+          When I'm not building brands, I'm writing about the things corporate life makes us forget — that we're still human beings who need rest, connection, and a little chaos.
+        </p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-item">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Years in Brand & Content</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Campaigns Executed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Stories Worth Telling</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1</div>
+          <div class="stat-label">Mission — Make it Human</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ===== WHO IS RIYA ===== -->
-<div style="padding: 5rem 1rem 0;">
-  <div class="who-section reveal">
-    <p class="section-eyebrow">✦ About her</p>
-    <h2 class="section-heading">She's not just <span>beautiful</span> —<br/>she's a whole personality.</h2>
-    <p style="color:#7a6080; line-height:1.8; font-size:0.95rem; max-width:600px;">
-      Brand Strategist. Influencer Marketing Manager. Content Lead at Devout Growth.
-      Someone who turns LinkedIn into a playground, campaigns into magic, and every room she walks into — memorable.
-    </p>
-    <div class="trait-grid">
-      <div class="trait-card">
-        <div class="trait-icon">🎤</div>
-        <div class="trait-title">Public Speaker</div>
-        <div class="trait-desc">Mind-blowing clarity, confidence, and charisma — she holds a room like a pro.</div>
+<!-- EXPERTISE -->
+<section id="expertise" class="expertise-section">
+  <div class="section-wrapper">
+    <p class="eyebrow reveal">✦ What I do</p>
+    <h2 class="display-heading reveal">The work I was<br/><em>built for.</em></h2>
+    <div class="expertise-grid reveal">
+      <div class="expertise-card">
+        <span class="card-icon">🎯</span>
+        <div class="card-title">Brand Strategy</div>
+        <div class="card-desc">Positioning brands in ways that stick — from voice frameworks to competitive differentiation. I help brands know who they are and say it clearly.</div>
       </div>
-      <div class="trait-card">
-        <div class="trait-icon">✍️</div>
-        <div class="trait-title">Creative Writer</div>
-        <div class="trait-desc">Her words cut through noise — raw, real, and always felt deeply by everyone who reads them.</div>
+      <div class="expertise-card">
+        <span class="card-icon">✍️</span>
+        <div class="card-title">Content Creation</div>
+        <div class="card-desc">Long-form, short-form, social, editorial. Content that doesn't fill space but earns attention — and keeps it.</div>
       </div>
-      <div class="trait-card">
-        <div class="trait-icon">🌸</div>
-        <div class="trait-title">Sensitive & Strong</div>
-        <div class="trait-desc">She'll cry mid-argument and counter you back even stronger. That's pure Riya energy.</div>
+      <div class="expertise-card">
+        <span class="card-icon">🌐</span>
+        <div class="card-title">Influencer Marketing</div>
+        <div class="card-desc">End-to-end influencer campaign management — from creator discovery and briefing to execution, tracking, and reporting.</div>
       </div>
-      <div class="trait-card">
-        <div class="trait-icon">⚡</div>
-        <div class="trait-title">Brand Builder</div>
-        <div class="trait-desc">From campaigns to influencer networks — she makes things work, effortlessly, brilliantly.</div>
+      <div class="expertise-card">
+        <span class="card-icon">📢</span>
+        <div class="card-title">Social Media Strategy</div>
+        <div class="card-desc">Turning LinkedIn, Instagram, and beyond into growth engines. I build content calendars that convert followers into fans.</div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== MEMORIES TIMELINE ===== -->
-<section class="memories-section reveal">
-  <p class="section-eyebrow">✦ Memories</p>
-  <h2 class="section-heading">A journey that started in<br/><span>Standard 7</span></h2>
-  <p style="color:#7a6080; line-height:1.8; font-size:0.95rem;">
-    We've known each other since 2012 — same school, same laughter, same years growing up.
-    Some friendships don't need daily calls; they're written into who you are.
-  </p>
-
-  <div class="timeline">
-
-    <div class="timeline-item">
-      <div class="timeline-year">2012</div>
-      <div class="timeline-content">
-        <div class="timeline-emoji">🏫</div>
-        <div class="timeline-title">Standard 7 — Where it all began</div>
-        <div class="timeline-text">New class, new faces — and somewhere in that chaos, a girl who already stood out. Riya walked into the room and the room noticed.</div>
+      <div class="expertise-card">
+        <span class="card-icon">💡</span>
+        <div class="card-title">Campaign Ideation</div>
+        <div class="card-desc">From brief to execution — conceptualising campaigns that are memorable, measurable, and meaningful for the brand and its audience.</div>
+      </div>
+      <div class="expertise-card">
+        <span class="card-icon">🤝</span>
+        <div class="card-title">Brand Communication</div>
+        <div class="card-desc">Crafting the words, tone, and voice that make a brand instantly recognisable — across every touchpoint, every audience, every format.</div>
       </div>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-year">2013</div>
-      <div class="timeline-content">
-        <div class="timeline-emoji">📚</div>
-        <div class="timeline-title">Class chaos & real laughs</div>
-        <div class="timeline-text">School days with Riya were never boring. Whether it was class, corridors, or those shared lunch breaks — the energy was always alive.</div>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-year">2016</div>
-      <div class="timeline-content">
-        <div class="timeline-emoji">🎓</div>
-        <div class="timeline-title">10th Board — Last chapter together</div>
-        <div class="timeline-text">Four years of shared school life wrapped up. Different paths ahead, but the friendship? That stays. Always.</div>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-year">Now</div>
-      <div class="timeline-content">
-        <div class="timeline-emoji">🚀</div>
-        <div class="timeline-title">Riya Rajput — Content Lead, Brand Strategist</div>
-        <div class="timeline-text">From school corridors to building brands at Devout Growth. Watching you grow has been genuinely inspiring, Riya.</div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ===== WISH LETTER ===== -->
-<div style="padding: 0 1rem 5rem;">
-  <div class="wish-section reveal">
-    <span class="wish-quote-mark">"</span>
-    <p class="wish-text">
-      Riya — you were always <strong>too vibrant to be ordinary</strong>.<br/><br/>
-      From the girl who lit up every classroom to the woman who builds brands and moves people with her words — you've never once dimmed your light for anyone.<br/><br/>
-      I hope this year brings you everything your generous heart deserves: <strong>success that excites you, love that holds you, and stories worth telling</strong>.<br/><br/>
-      Keep that chulbuli vibe alive. The world genuinely needs more of you in it. 🌸
-    </p>
-    <div class="petal-divider">🌸 · ✨ · 🌸</div>
-    <p class="wish-from">With warmth & all the old memories,<br/>Ankit Saurav 🎂</p>
+<!-- WORK -->
+<section id="work">
+  <div class="section-wrapper">
+    <p class="eyebrow reveal">✦ Selected Work</p>
+    <h2 class="display-heading reveal">Work that<br/><em>moved things.</em></h2>
+    <div class="work-grid reveal">
+      <div class="work-card work-card-large">
+        <span class="work-tag">Brand Strategy · Devout Growth</span>
+        <div class="work-title">Building Devout Growth's LinkedIn Presence from the Ground Up</div>
+        <div class="work-desc">Developed and executed the full LinkedIn content strategy for Devout Growth — from brand voice definition and content pillars to team birthday campaigns, thought leadership posts, and engagement frameworks. Grew the page to 4,000+ followers with consistent, high-engagement content.</div>
+        <div class="work-metrics">
+          <div class="metric"><span class="metric-val">4K+</span><span class="metric-key">Followers Built</span></div>
+          <div class="metric"><span class="metric-val">2×</span><span class="metric-key">Engagement Rate</span></div>
+          <div class="metric"><span class="metric-val">12mo</span><span class="metric-key">Consistent Growth</span></div>
+        </div>
+      </div>
+      <div class="work-card">
+        <span class="work-tag">Influencer Marketing</span>
+        <div class="work-title">Influencer Campaign Management</div>
+        <div class="work-desc">End-to-end influencer programs — identifying the right creators, crafting briefs that preserve brand voice, and tracking ROI across campaigns in competitive verticals.</div>
+      </div>
+      <div class="work-card">
+        <span class="work-tag">Content Lead</span>
+        <div class="work-title">Content Strategy & Team Leadership</div>
+        <div class="work-desc">Leading content creation across verticals — managing timelines, aligning creative teams, and ensuring every piece of content serves both the brand story and the business goal.</div>
+      </div>
+      <div class="work-card">
+        <span class="work-tag">Personal Brand · LinkedIn</span>
+        <div class="work-title">Personal Branding & Thought Leadership</div>
+        <div class="work-desc">Building an authentic personal brand that speaks to the intersection of creativity, corporate life, and human-first storytelling — with posts regularly crossing 100+ reactions.</div>
+        <div class="work-metrics">
+          <div class="metric"><span class="metric-val">100+</span><span class="metric-key">Reactions per Post</span></div>
+          <div class="metric"><span class="metric-val">1st</span><span class="metric-key">Degree Network</span></div>
+        </div>
+      </div>
+      <div class="work-card">
+        <span class="work-tag">Brand Voice</span>
+        <div class="work-title">Brand Voice & Tone Guidelines</div>
+        <div class="work-desc">Defining how brands speak — creating voice documents, tone frameworks, and messaging hierarchies that align entire teams around a single, consistent identity.</div>
+      </div>
+    </div>
   </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<div class="philosophy-section">
+  <p class="eyebrow" style="color:var(--lilac); margin-bottom:2rem;">✦ Philosophy</p>
+  <blockquote class="philosophy-quote reveal">
+    "The best brands don't just <strong>say something</strong> —<br/>they make you feel like someone finally <strong>said it out loud.</strong>"
+  </blockquote>
+  <p class="philosophy-attr">— Riya Rajput</p>
 </div>
 
-<!-- ===== LINKS ===== -->
-<div class="links-section reveal">
-  <p class="section-eyebrow">✦ Connect with Riya</p>
-  <h2 class="section-heading" style="font-size:2rem;">Follow her <span>journey</span></h2>
-  <div class="link-row">
-    <a href="https://www.linkedin.com/in/riya-rajput-6b6721205" target="_blank" class="link-pill pill-linkedin">
-      💼 LinkedIn — Riya Rajput
-    </a>
-    <a href="https://www.instagram.com/_riyaaarushes09" target="_blank" class="link-pill pill-instagram">
-      📸 Instagram — @_riyaaarushes09
-    </a>
-    <a href="https://www.devoutgrowth.com/" target="_blank" class="link-pill pill-company">
-      🏢 Devout Growth
-    </a>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrapper">
+    <p class="eyebrow reveal">✦ Experience</p>
+    <h2 class="display-heading reveal">Where I've<br/><em>earned it.</em></h2>
+    <div class="exp-list">
+      <div class="exp-item reveal">
+        <div class="exp-period">2023 — Present</div>
+        <div>
+          <div class="exp-role">Content Lead & Brand Communication Strategist</div>
+          <div class="exp-company">Devout Growth</div>
+          <div class="exp-desc">Leading content strategy across brand and influencer verticals. Responsible for LinkedIn growth, campaign ideation, team coordination, and maintaining the brand's editorial voice across all outputs.</div>
+        </div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-period">2022 — 2023</div>
+        <div>
+          <div class="exp-role">Influencer Marketing Manager</div>
+          <div class="exp-company">Devout Growth</div>
+          <div class="exp-desc">Managed end-to-end influencer campaigns — from brief creation and creator sourcing to execution, tracking, and post-campaign analysis across multiple brand clients.</div>
+        </div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-period">2021 — 2022</div>
+        <div>
+          <div class="exp-role">Social Media & Brand Strategist</div>
+          <div class="exp-company">Early Career</div>
+          <div class="exp-desc">Built foundational expertise in social strategy, content creation, and brand positioning — developing a reputation for bringing both creative instinct and analytical discipline to every project.</div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- ===== FOOTER ===== -->
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="section-wrapper">
+    <p class="eyebrow reveal">✦ Skills</p>
+    <h2 class="display-heading reveal">The toolkit that<br/><em>gets it done.</em></h2>
+    <div class="skills-cloud reveal">
+      <span class="skill-tag rose">Brand Strategy</span>
+      <span class="skill-tag">Content Marketing</span>
+      <span class="skill-tag rose">Influencer Marketing</span>
+      <span class="skill-tag">LinkedIn Growth</span>
+      <span class="skill-tag gold">Campaign Management</span>
+      <span class="skill-tag">Social Media Strategy</span>
+      <span class="skill-tag rose">Brand Voice & Tone</span>
+      <span class="skill-tag">Thought Leadership</span>
+      <span class="skill-tag">Copywriting</span>
+      <span class="skill-tag gold">Content Calendar Planning</span>
+      <span class="skill-tag">Audience Engagement</span>
+      <span class="skill-tag rose">Creator Briefing</span>
+      <span class="skill-tag">Editorial Strategy</span>
+      <span class="skill-tag">Team Leadership</span>
+      <span class="skill-tag gold">Brand Positioning</span>
+      <span class="skill-tag">Public Speaking</span>
+      <span class="skill-tag">Storytelling</span>
+      <span class="skill-tag rose">ROI Tracking</span>
+      <span class="skill-tag">Instagram Strategy</span>
+      <span class="skill-tag">Personal Branding</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <p class="eyebrow reveal" style="position:relative;">✦ Let's work together</p>
+  <h2 class="display-heading reveal" style="position:relative; font-size:clamp(2rem,4vw,3rem);">Have a brand story<br/><em>worth telling?</em></h2>
+  <a href="mailto:riya@devoutgrowth.com" class="contact-email reveal">riya@devoutgrowth.com</a>
+  <div class="contact-links reveal">
+    <a href="https://www.linkedin.com/in/riya-rajput-6b6721205" target="_blank" class="contact-pill pill-li">💼 LinkedIn</a>
+    <a href="https://www.instagram.com/_riyaaarushes09" target="_blank" class="contact-pill pill-ig">📸 Instagram</a>
+    <a href="https://www.devoutgrowth.com" target="_blank" class="contact-pill pill-dg">🏢 Devout Growth</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>🎂 Crafted with love for <strong>Riya Rajput's 24th Birthday — 27 June 2026</strong></p>
-  <p style="margin-top:0.5rem;">Created &amp; wished by <strong>Ankit Saurav</strong> · School friend since 2012 <span class="footer-heart">♥</span></p>
-  <p style="margin-top:0.3rem;">© 2026 <a href="https://www.linkedin.com/in/riya-rajput-6b6721205" target="_blank">Riya Rajput</a> — All rights reserved.</p>
+  <span>© 2026 Riya Rajput. All rights reserved.</span>
+  <span>Designed with intention · Built for impact</span>
 </footer>
 
 <script>
-  // ===== CONFETTI =====
-  const canvas = document.getElementById('confetti-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  // ── CURSOR ──
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
 
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top  = my + 'px';
   });
 
-  const COLORS = ['#E8837A','#C9A8E0','#F5C842','#F9D5D3','#A8D8C8','#fff','#FFC0CB'];
-  const SHAPES = ['●','♥','★','✦','⬟'];
-
-  class Particle {
-    constructor() { this.reset(true); }
-    reset(init = false) {
-      this.x = Math.random() * canvas.width;
-      this.y = init ? Math.random() * canvas.height : -20;
-      this.size = Math.random() * 8 + 4;
-      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
-      this.speedY = Math.random() * 1.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 1.2;
-      this.rotation = Math.random() * 360;
-      this.rotSpeed = (Math.random() - 0.5) * 3;
-      this.opacity = Math.random() * 0.6 + 0.3;
-    }
-    update() {
-      this.y += this.speedY;
-      this.x += this.speedX;
-      this.rotation += this.rotSpeed;
-      if (this.y > canvas.height + 20) this.reset();
-    }
-    draw() {
-      ctx.save();
-      ctx.globalAlpha = this.opacity;
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rotation * Math.PI / 180);
-      ctx.font = `${this.size * 2}px serif`;
-      ctx.fillStyle = this.color;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(this.shape, 0, 0);
-      ctx.restore();
-    }
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
   }
+  animRing();
 
-  const particles = Array.from({ length: 60 }, () => new Particle());
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cur.style.width  = '20px';
+      cur.style.height = '20px';
+      ring.style.width  = '60px';
+      ring.style.height = '60px';
+      ring.style.borderColor = 'rgba(212,132,122,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cur.style.width  = '12px';
+      cur.style.height = '12px';
+      ring.style.width  = '40px';
+      ring.style.height = '40px';
+      ring.style.borderColor = 'rgba(212,132,122,0.5)';
+    });
+  });
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── TYPEWRITER ──
+  const roles = [
+    'Brand Communication Strategist',
+    'Content Lead at Devout Growth',
+    'Influencer Marketing Manager',
+    'Storyteller at Heart',
+    'The Creative Behind the Brand'
+  ];
+  let ri = 0, ci = 0, deleting = false;
+  const tw = document.getElementById('typewriter');
+
+  function type() {
+    const word = roles[ri];
+    if (!deleting) {
+      tw.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      tw.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(type, deleting ? 40 : 65);
   }
-  animate();
+  setTimeout(type, 1200);
 
-  // ===== SCROLL REVEAL =====
-  const observer = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.12 }
+  // ── SCROLL REVEAL ──
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.1 }
   );
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // ===== BIRTHDAY BURST on load =====
-  setTimeout(() => {
-    for (let i = 0; i < 30; i++) {
-      const p = new Particle();
-      p.y = canvas.height / 2;
-      p.x = canvas.width / 2 + (Math.random() - 0.5) * 200;
-      p.speedY = -(Math.random() * 4 + 2);
-      p.speedX = (Math.random() - 0.5) * 6;
-      particles.push(p);
-    }
-  }, 1200);
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
